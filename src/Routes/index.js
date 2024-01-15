@@ -31,7 +31,7 @@ router.post("/register",async(req,res)=>{
             //adding user to the db
             const registeringUser=await addingUser(data);
             //sending mail to activate account
-            const link=`http://localhost:5173/activation/${registeringUser[0]._id}`
+            const link=`https://makeasyurl.netlify.app/activation/${registeringUser[0]._id}`
             const composingMail={
                 from:"fullstackpurpose@gmail.com",
                 to:"fabiraja21052002@gmail.com",
@@ -95,7 +95,7 @@ router.post("/login",async(req,res)=>{
                 }else{
                     //if account is not active
                      //sending mail to activate account
-                    const link=`http://localhost:5173/activation/${checkUser[0]._id}`
+                    const link=`https://makeasyurl.netlify.app/activation/${checkUser[0]._id}`
                     const composingMail={
                         from:"fullstackpurpose@gmail.com",
                         to:"fabiraja21052002@gmail.com",
@@ -141,7 +141,7 @@ router.post("/forgot",async(req,res)=>{
             //adding token to the database
             const setToken=await forgotToken(findUser[0]._id,token);
              //sending mail to reset password
-             const link=`http://localhost:5173/reset/${findUser[0]._id}`
+             const link=`https://makeasyurl.netlify.app/reset/${findUser[0]._id}`
              const composingMail={
                  from:"fullstackpurpose@gmail.com",
                  to:"fabiraja21052002@gmail.com",
@@ -222,7 +222,7 @@ router.post("/shortUrl",isAuthorized,async(req,res)=>{
         //creating randomstring
         const randomString=Math.random().toString(36).slice(5,9);
         //passing randomString as params
-        const link=`http://localhost:5173/new/${randomString}`
+        const link=`https://makeasyurl.netlify.app/new/${randomString}`
         const updateShortUrl=await addingShortUrl(findUrl._id,link,randomString);
         const findUrlForData=await find(req.body.id);
         res.status(200).json({message:findUrlForData})
