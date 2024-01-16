@@ -9,7 +9,7 @@ const urlSchema=new mongoose.Schema({
     type:String,
    },
    createdOn:{
-    type:Date
+    type:String
    },
    count:{
       type:Number
@@ -18,7 +18,9 @@ const urlSchema=new mongoose.Schema({
       type:String
    }
 
-});
+},
+{timestamps:true}
+);
 
 const Link=mongoose.model("links",urlSchema);
 export {Link};

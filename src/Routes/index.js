@@ -201,7 +201,7 @@ router.post("/addUrl",isAuthorized,async(req,res)=>{
             const data={
                 longUrl:req.body.longUrl,
                 shortUrl:"",
-                createdOn:new Date(),
+                createdOn:new Date().toDateString(),
                 count:0,
                 string:""
             }

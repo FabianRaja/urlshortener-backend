@@ -30,10 +30,9 @@ export function allUrls(){
 }
 //finding count for month
 export function findData(month,year){
-    return Link.find({createdOn:{$gt: new Date(`${year}-${month}-01`),$lt: new Date(`${year}-${month}-31`)}});
+    return Link.find({createdAt:{$gt: new Date(`${year}-${month}-01`),$lt: new Date(`${year}-${month}-31`)}});
 }
 //finding count for day
 export function findDataDay(date1,date2,month,year){
-    return Link.find({createdOn:{$gt: new Date(`${year}-${month}-${date1}`),$lt: new Date(`${year}-${month}-${date2}`)}});
+    return Link.find({createdAt:{$gt: new Date(`${year}-${month}-${date1}`),$lt: new Date(`${year}-${month}-${date2}`)}});
 }
-
