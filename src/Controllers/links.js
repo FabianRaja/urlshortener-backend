@@ -34,5 +34,6 @@ export function findData(month,year){
 }
 //finding count for day
 export function findDataDay(date1,date2,month,year){
-    return Link.find({createdOn:{$gte: new Date(`${year}-${month}-${date1}`),$lte: new Date(`${year}-${month}-${date2}`)}});
+    return Link.find({createdOn:{$gt: new Date(`${year}-${month}-${date1}`),$lt: new Date(`${year}-${month}-${date2}`)}});
 }
+
