@@ -9,6 +9,7 @@ export function generateExpiryToken(id){
 }
 //custom authorization middleware
 export function isAuthorized(req,res,next){
+    //getting headers 
     const token=req.headers["x-auth-token"];
     if(!token){
         res.status(400).json({message:"Access denied"});

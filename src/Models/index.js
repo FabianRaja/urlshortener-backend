@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//model schema for url collection in database
 const urlSchema=new mongoose.Schema({
 
    longUrl:{

@@ -32,9 +32,10 @@ router.post("/register",async(req,res)=>{
             const registeringUser=await addingUser(data);
             //sending mail to activate account
             const link=`https://makeasyurl.netlify.app/activation/${registeringUser[0]._id}`
+            //composing mail
             const composingMail={
                 from:"fullstackpurpose@gmail.com",
-                to:"fabiraja21052002@gmail.com",
+                to:registeringUser.email,
                 subject:"Account Activation Link",
                 html:`<a href=${link}><button style="background:violet;
                 color:black;
@@ -46,6 +47,7 @@ router.post("/register",async(req,res)=>{
                 ">Click to Activate Account</button></a>
                 `
             }
+            //creating transport to send mail
             transport.sendMail(composingMail,(error,info)=>{
                 if(error){
                     console.log(error)
@@ -96,9 +98,10 @@ router.post("/login",async(req,res)=>{
                     //if account is not active
                      //sending mail to activate account
                     const link=`https://makeasyurl.netlify.app/activation/${checkUser[0]._id}`
+                    //composing mail
                     const composingMail={
                         from:"fullstackpurpose@gmail.com",
-                        to:"fabiraja21052002@gmail.com",
+                        to:checkUser.email,
                         subject:"Account Activation Link",
                         html:`<a href=${link}><button style="background:violet;
                         color:black;
@@ -110,6 +113,7 @@ router.post("/login",async(req,res)=>{
                         ">Click to Activate Account</button></a>
                         `
                     }
+                    //creating transport to send mail
                     transport.sendMail(composingMail,(error,info)=>{
                         if(error){
                             console.log(error)
@@ -142,9 +146,10 @@ router.post("/forgot",async(req,res)=>{
             const setToken=await forgotToken(findUser[0]._id,token);
              //sending mail to reset password
              const link=`https://makeasyurl.netlify.app/reset/${findUser[0]._id}`
+             //composing mail
              const composingMail={
                  from:"fullstackpurpose@gmail.com",
-                 to:"fabiraja21052002@gmail.com",
+                 to:findUser[0].email,
                  subject:"Password Reset Link",
                  html:`<a href=${link}><button style="background:violet;
                  color:black;
@@ -155,6 +160,7 @@ router.post("/forgot",async(req,res)=>{
                  font-weight:bolder;
                  ">Click to Reset Password</button></a>`
              }
+             //creating transport to send mail
              transport.sendMail(composingMail,(error,info)=>{
                  if(error){
                      console.log(error)
@@ -223,7 +229,9 @@ router.post("/shortUrl",isAuthorized,async(req,res)=>{
         const randomString=Math.random().toString(36).slice(5,9);
         //passing randomString as params
         const link=`https://makeasyurl.netlify.app/new/${randomString}`
+        //adding short url 
         const updateShortUrl=await addingShortUrl(findUrl._id,link,randomString);
+        //finding url to send response
         const findUrlForData=await find(req.body.id);
         res.status(200).json({message:findUrlForData})
     } catch (error) {
@@ -265,13 +273,14 @@ router.get("/getUrl",isAuthorized,async(req,res)=>{
 //count for dashboard
 router.get("/count",async(req,res)=>{
     try {
+        //getting count of number of urls created
         const data=await findData();
         res.status(200).json({message:data}); 
     } catch (error) {
         console.log(error)
         res.status(500).json({error:"Error getting count"})
     }
-})
+}) 
 
 //exporting router
 export const Router=router;

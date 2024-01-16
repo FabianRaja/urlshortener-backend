@@ -3,8 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import dbConnect from "./db.js";
 import { Router } from "./src/Routes/index.js";
+//configuring dotenv
 dotenv.config();
-
 //initializing port
 const PORT=process.env.PORT;
 //initializing server
