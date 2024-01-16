@@ -5,7 +5,7 @@ import { activation,findUser, findingUser, forgotToken, updatingPassword } from 
 import addingUser from "../Controllers/index.js";
 import { transport } from "../Mailer/nodeMailer.js";
 import { generateExpiryToken, generateToken, isAuthorized } from "../Authorization/auth.js";
-import addingUrl, { addingShortUrl, allUrls, find, findByUrl, findData, findDataDay, findUrl, increaseCount } from "../Controllers/links.js";
+import addingUrl, { addingShortUrl, allUrls, find, findByUrl, findData, findUrl, increaseCount } from "../Controllers/links.js";
 //initializing router
 const router=express.Router();
 //user registration
@@ -265,13 +265,8 @@ router.get("/getUrl",isAuthorized,async(req,res)=>{
 //count for dashboard
 router.get("/count",async(req,res)=>{
     try {
-        const details=new Date().toLocaleDateString();
-        const date=details.slice(0,2);
-        const month=details.slice(3,4);
-        const year=details.slice(5,9);
-        const monthData=await findData(month,year);
-        const dayData=await findDataDay(+date-1,+date+1,month,year);
-        res.status(200).json({month:monthData,day:dayData}); 
+        const data=await findData();
+        res.status(200).json({message:data}); 
     } catch (error) {
         console.log(error)
         res.status(500).json({error:"Error getting count"})
