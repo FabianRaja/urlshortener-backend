@@ -35,7 +35,7 @@ router.post("/register",async(req,res)=>{
             //composing mail
             const composingMail={
                 from:"fullstackpurpose@gmail.com",
-                to:registeringUser.email,
+                to:"fabiraja21052002@gmail.com",
                 subject:"Account Activation Link",
                 html:`<a href=${link}><button style="background:violet;
                 color:black;
