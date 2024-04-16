@@ -28,8 +28,8 @@ export function isAuthorizedLogin(req,res,next){
         res.status(400).json({message:"Access denied"});
     }else{
         //comparing and verifying
-        const check=pass===process.env.password;
-        if(check===true){
+        const check=pass==process.env.password;
+        if(check==true){
             next();
         }else{
             res.status(400).json({message:"Invalid Admin"});
