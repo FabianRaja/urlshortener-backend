@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 import { activation,findUser, findingUser, forgotToken, updatingPassword } from "../Controllers/index.js";
 import addingUser from "../Controllers/index.js";
 import { transport } from "../Mailer/nodeMailer.js";
-import { generateExpiryToken, generateToken, isAuthorized } from "../Authorization/auth.js";
+import { generateExpiryToken, generateToken, isAuthorized, isAuthorizedLogin } from "../Authorization/auth.js";
 import addingUrl, { addingShortUrl, allUrls, find, findByUrl, findData, findUrl, increaseCount } from "../Controllers/links.js";
 //initializing router
 const router=express.Router();
@@ -79,7 +79,7 @@ router.get("/activation/:id",async(req,res)=>{
     }
 })
 //login User
-router.post("/login",async(req,res)=>{
+router.post("/login",isAuthorizedLogin,async(req,res)=>{
     try {
         //checking is user email is registered 
         const checkUser=await findingUser(req.body.email);
